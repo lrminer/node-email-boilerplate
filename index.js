@@ -5,6 +5,9 @@ const app = express();
 
 const yourEmail = process.env.EMAIL
 
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -15,6 +18,8 @@ const transporter = nodemailer.createTransport({
 
 
 app.post('/api/email', (req, res) => {
+
+    console.log(req.body);
 
     const mailOptions = {
         from: yourEmail,
